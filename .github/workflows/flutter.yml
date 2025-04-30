@@ -6,13 +6,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Важно для Flutter!
+          fetch-depth: 0 
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.22.0'
+          channel: 'stable'
       - run: flutter pub get
       - run: flutter build web --release
+      - run: ls -la build/web
       - uses: peaceiris/actions-gh-pages@v3
+  
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/web
